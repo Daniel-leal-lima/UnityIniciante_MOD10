@@ -10,14 +10,31 @@ public class TypewritterEffect : MonoBehaviour
     int charactersCount;
     int counter;
     float timeCounter;
-    private void Start()
+
+    public void ResetEffect()
     {
         charactersCount = tmPro.text.Length;
-        Debug.Log(charactersCount);
         tmPro.maxVisibleCharacters = 0;
         counter = 0;
         timeCounter = Time.time;
     }
+    private void Start()
+    {
+        ResetEffect();
+    }
+    public bool EfeitoEstaAtivo()
+    {
+        return counter <= charactersCount;
+    }
+
+    public void CompletaTexto()
+    {
+        if (EfeitoEstaAtivo())
+        {
+            counter = charactersCount;
+        }
+    }
+
     private void Update()
     {
         if(counter<= charactersCount)
@@ -32,7 +49,7 @@ public class TypewritterEffect : MonoBehaviour
         }
         else
         {
-            this.enabled = false;
+            return;
         }
     }
 }

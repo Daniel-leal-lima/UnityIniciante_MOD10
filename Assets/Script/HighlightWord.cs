@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class EffectInWord : MonoBehaviour
+public class HighlightWord : MonoBehaviour
 {
     [SerializeField] TMP_Text tmPro;
-    [SerializeField] string specialWord;
+    [SerializeField] TMP_InputField specialWord;
     [SerializeField] Color32 color;
+
 
     void Update()
     {
+        tmPro.color = tmPro.color;
         // SPECIAL WORD
-        int startIndex = tmPro.text.IndexOf(specialWord);
-        int lastIndex = startIndex + specialWord.Length;
+        int startIndex = tmPro.text.IndexOf(specialWord.text);
+        int lastIndex = startIndex + specialWord.text.Length;
 
         TMP_TextInfo textInfo = tmPro.textInfo;
         if (textInfo.characterCount > 0)
@@ -33,7 +35,5 @@ public class EffectInWord : MonoBehaviour
             }
         }
         tmPro.UpdateVertexData(TMP_VertexDataUpdateFlags.All);
-
     }
-
 }
