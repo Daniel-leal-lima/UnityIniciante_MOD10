@@ -12,13 +12,12 @@ public class HighlightWord : MonoBehaviour
 
     void Update()
     {
-        tmPro.color = tmPro.color;
         // SPECIAL WORD
         int startIndex = tmPro.text.IndexOf(specialWord.text);
         int lastIndex = startIndex + specialWord.text.Length;
 
         TMP_TextInfo textInfo = tmPro.textInfo;
-        if (textInfo.characterCount > 0)
+        if (textInfo.characterCount > 0 && startIndex >= 0)
         {
             for (int i = startIndex; i < lastIndex; i++)
             {
@@ -35,5 +34,11 @@ public class HighlightWord : MonoBehaviour
             }
         }
         tmPro.UpdateVertexData(TMP_VertexDataUpdateFlags.All);
+    }
+    public void OnValueChange()
+    {
+        tmPro.mesh.colors = tmPro.mesh.colors;
+        tmPro.UpdateVertexData(TMP_VertexDataUpdateFlags.All);
+        tmPro.ForceMeshUpdate();
     }
 }
